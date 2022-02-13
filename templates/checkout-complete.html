@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <title>Checkout result</title>
+
+    <div class="status-container">
+        <div class="status">
+{% if result_code=="Authorised" %}
+            <img src="{{ url_for('static', filename='img/success.svg') }}" class="status-image"/>
+            <p class="status-message">Your order has been successfully placed. The payment is authorized.</p>
+            <a class="button" href="/">Return</a>
+{% elif result_code=="Received" %}            
+            <img src="{{ url_for('static', filename='img/success.svg') }}" class="status-image"/>   
+            <p class="status-message">Your order has been successfully placed. The payment is pending.</p>
+            <a class="button" href="/">Return</a>
+{% elif result_code=="Refused" %}     
+            <img src="{{ url_for('static', filename='img/failed.svg') }}" class="status-image"/>
+            <p class="status-message">Your order did not work. The payment was refused. Please try again.</p>
+            <a class="button" href="/">Return</a>
+{% else %}            
+            <img src="{{ url_for('static', filename='img/failed.svg') }}" class="status-image"/>
+            <p class="status-message">Your order did not work for some reason.</p>
+            <a class="button" href="/">Return</a>
+
+{% endif %}
+        </div>
+    </div>
+{% endblock %}
